@@ -24,7 +24,7 @@ app.get('/calculationHistory', (req, res) => {
 
 //POST requests
 app.post('/newCalculation', (req, res) => {
-  console.log(`serverSide ${req.body}`);
+  console.log(req.body);
   res.sendStatus(200);
 })//end POST req
 
