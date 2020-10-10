@@ -6,6 +6,7 @@ const app = express();
 const port = 5000;
 
 app.use(express.static('server/public'));
+app.use(bodyParser.urlencoded({extended: true}));
 //end server setup
 
 //Variables
@@ -17,10 +18,15 @@ let calculationHistory = [{
 ];
 
 //GET requests
-app.get('/calculations', (req, res) => {
+app.get('/calculationHistory', (req, res) => {
   res.send(calculationHistory);
-})
+})//end GET req
 
+//POST requests
+app.post('/newCalculation', (req, res) => {
+  console.log(`serverSide ${req.body}`);
+  res.sendStatus(200);
+})//end POST req
 
 app.listen(port, () => {
   console.log('Up and Running on Port: ', port);

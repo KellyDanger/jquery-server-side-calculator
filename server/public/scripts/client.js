@@ -31,20 +31,29 @@ function operatorSetDivide (){
 }//end operatorSetDivide
 
 function submitCalculation(){
-  let calculation = {
+  let newCalculation = {
     inputOne: $('#numInput1').val(),
     inputTwo: $('#numInput2').val(),
     operator: operatorChoice
   }
-  console.log(calculation);
+  console.log("client side ", newCalculation);
   
+  $.ajax({
+    method: 'POST',
+    url: '/newCalculation',
+    data: newCalculation
+  }).then(function(response) {
+    console.log('response', response);
+  }).catch(function(error) {
+    alert(error);
+  })
 }//end submitCalculation
 
 
 function getMathRecord() {
   $.ajax({
     method: 'GET',
-    url: '/calculations'
+    url: '/calculationHistory'
   }).then(function(response){
     console.log(response);
   }).catch(function(error){
