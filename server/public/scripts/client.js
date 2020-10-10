@@ -9,29 +9,37 @@ function onReady(){
   $('#subtractButton').on('click', operatorSetSubtract);
   $('#multiplyButton').on('click', operatorSetMultiply);
   $('#divideButton').on('click', operatorSetDivide);
+  $('#equalsButton').on('click', submitCalculation);
   
 }//end onReady
 let operatorChoice; 
 
 function operatorSetAdd (){ 
   operatorChoice = 'add'
-  console.log("we're going to", operatorChoice)
 }//end operatorSetAdd
 
 function operatorSetSubtract (){ 
   operatorChoice = 'subtract'
-  console.log("we're going to", operatorChoice)
 }//end operatorSetSubtract
 
 function operatorSetMultiply (){ 
   operatorChoice = 'multiply'
-  console.log("we're going to", operatorChoice)
 }//end operatorSetMultiply
 
 function operatorSetDivide (){ 
   operatorChoice = 'divide'
-  console.log("we're going to", operatorChoice)
 }//end operatorSetDivide
+
+function submitCalculation(){
+  let calculation = {
+    inputOne: $('#numInput1').val(),
+    inputTwo: $('#numInput2').val(),
+    operator: operatorChoice
+  }
+  console.log(calculation);
+  
+}//end submitCalculation
+
 
 function getMathRecord() {
   $.ajax({
