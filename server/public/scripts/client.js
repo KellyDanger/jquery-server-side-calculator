@@ -10,6 +10,7 @@ function onReady(){
   $('#multiplyButton').on('click', operatorSetMultiply);
   $('#divideButton').on('click', operatorSetDivide);
   $('#equalsButton').on('click', submitCalculation);
+  $('#clearButton').on('click', clearInputs);
   
 }//end onReady
 let operatorChoice; 
@@ -30,6 +31,11 @@ function operatorSetMultiply (){
 function operatorSetDivide (){ 
   operatorChoice = '/'
 }//end operatorSetDivide
+
+function clearInputs(){
+  $('#numInput1').val('');
+  $('#numInput2').val('');
+}//endClearInputs
 
 function submitCalculation(){
   let newCalculation = {
