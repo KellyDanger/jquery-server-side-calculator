@@ -61,7 +61,9 @@ function getAnswer() {
 }//end get mathRecord request
 
 function appendAnswer(){
-  console.log(result);
+  $('#answer').html(`
+    <p>${result}<p>
+  `)
 }//end appendAnswer
 
 
