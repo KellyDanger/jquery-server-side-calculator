@@ -103,7 +103,6 @@ function appendCalculations(array) {
 }//end appendCalculations
 
 
-
 // function getCalculation(){
 //   $.ajax({
 //       method: 'GET',
