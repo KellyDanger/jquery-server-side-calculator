@@ -44,7 +44,7 @@ app.post('/newCalculation', (req, res) => {
     numInput2: newInputTwo,
     operatorChoice: newOperator,
     solution: answer
-  }; 
+  };
   calculationHistory.push(newCalculation);
   res.sendStatus(200);
 })//end POST req

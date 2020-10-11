@@ -14,46 +14,50 @@ function onReady(){
   
 }//end onReady
 let operatorChoice; 
-let result;
 
 function operatorSetAdd (){ 
-  operatorChoice = '+'
+  operatorChoice = '+';
+  $(this).toggleClass("clickedButton");
 }//end operatorSetAdd
 
 function operatorSetSubtract (){ 
-  operatorChoice = '-'
+  operatorChoice = '-';
+  $(this).toggleClass("clickedButton");
 }//end operatorSetSubtract
 
 function operatorSetMultiply (){ 
-  operatorChoice = '*'
+  operatorChoice = '*';
+  $(this).toggleClass("clickedButton");
 }//end operatorSetMultiply
 
 function operatorSetDivide (){ 
-  operatorChoice = '/'
+  operatorChoice = '/';
+  $(this).toggleClass("clickedButton");
 }//end operatorSetDivide
 
 function clearInputs(){
   $('#numInput1').val('');
   $('#numInput2').val('');
+  $('button').removeClass();
 }//endClearInputs
 
 function submitCalculation(){
-  let newCalculation = {
+  let calcInputs = {
     inputOne: $('#numInput1').val(),
     inputTwo: $('#numInput2').val(),
     operator: operatorChoice
-  }
+  };
   $.ajax({
     method: 'POST',
     url: '/newCalculation',
-    data: newCalculation
+    data: calcInputs
   }).then(function(response) {
     //getCalculation();
     getMathRecord();
     getAnswer();
   }).catch(function(error) {
     alert(error);
-  })
+  });
 }//end submitCalculation
 
 function getAnswer() {
@@ -62,15 +66,15 @@ function getAnswer() {
     url: '/answer'
   }).then(function(response){
     result = response.answer;
-    appendAnswer();
+    appendAnswer(result);
   }).catch(function(error){
     alert(error);
   });
 }//end get mathRecord request
 
-function appendAnswer(){
+function appendAnswer(data){
   $('#answer').html(`
-    <p>${result}<p>
+    <p>${data}<p>
   `)
 }//end appendAnswer
 

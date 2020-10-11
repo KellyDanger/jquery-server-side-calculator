@@ -5,20 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="vendors/jquery.js"></script>
   <script src="scripts/client.js"></script>
+  <link rel="stylesheet" type="text/css" href="./styles/style.css"/>
   <title>JQuery-Server-Side-Calculator</title>
 </head>
 <body>
   <h1>Server Side Calculator</h1>
   <div class="calculator">
     <label htmlFor="numInput1">Enter Your First Number</label>
-    <input type="number" id="numInput1">
+    <input type="number" id="numInput1" class="input">
     <label htmlFor="operatorInput">What Shall we DO?</label>
-    <button id="plusButton">+</button>
-    <button id="subtractButton">-</button>
-    <button id="multiplyButton">*</button>
-    <button id="divideButton">/</button>
+    <button id="plusButton" class="operatorButton">+</button>
+    <button id="subtractButton" class="operatorButton">-</button>
+    <button id="multiplyButton" class="operatorButton">*</button>
+    <button id="divideButton" class="operatorButton">/</button>
     <label htmlFor="numInput2">Enter Your First Number</label>
-    <input type="number" id="numInput2">
+    <input type="number" id="numInput2" class="input">
     <button id="equalsButton">=</button>
     <button id="clearButton">C</button>  
   </div>
@@ -27,7 +28,7 @@
   </div>
   <div>
     <ul id="calculationList">
-      
+
     </ul>
   </div>
   
