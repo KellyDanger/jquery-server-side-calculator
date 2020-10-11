@@ -39,6 +39,7 @@ function clearInputs(){
   $('#numInput1').val('');
   $('#numInput2').val('');
   $('button').removeClass();
+  operatorChoice = null;
 }//endClearInputs
 
 
@@ -64,6 +65,7 @@ function submitCalculation(){
   });
 }//end submitCalculation
 
+//get the calculationHistory array from the server
 function getCalculationHistory() {
   $.ajax({
     method: 'GET',
@@ -75,24 +77,27 @@ function getCalculationHistory() {
   });
 }//end get getCalculationHistory request
 
+//retrieve the solution to the calculation
 function getAnswer() {
   $.ajax({
     method: 'GET',
     url: '/answer'
   }).then(function(response){
     result = response.answer;
-    appendAnswer(result);
+    displayAnswer(result);
   }).catch(function(error){
     alert(error);
   });
-}//end get mathRecord request
+}//end get getAnswer request
 
-function appendAnswer(data){
+//display the solution on the DOM
+function displayAnswer(data){
   $('#answer').html(`
     <p>${data}<p>
   `)
 }//end appendAnswer
 
+//list all calculations currently stored on the server to the DOM
 function appendCalculations(array) {
   $('#calculationList').empty();
   for(let calc of array){
