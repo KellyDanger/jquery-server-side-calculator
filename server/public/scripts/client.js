@@ -16,19 +16,19 @@ let operatorChoice;
 let result;
 
 function operatorSetAdd (){ 
-  operatorChoice = 'add'
+  operatorChoice = '+'
 }//end operatorSetAdd
 
 function operatorSetSubtract (){ 
-  operatorChoice = 'subtract'
+  operatorChoice = '-'
 }//end operatorSetSubtract
 
 function operatorSetMultiply (){ 
-  operatorChoice = 'multiply'
+  operatorChoice = '*'
 }//end operatorSetMultiply
 
 function operatorSetDivide (){ 
-  operatorChoice = 'divide'
+  operatorChoice = '/'
 }//end operatorSetDivide
 
 function submitCalculation(){
@@ -42,7 +42,8 @@ function submitCalculation(){
     url: '/newCalculation',
     data: newCalculation
   }).then(function(response) {
-    getCalculation();
+    //getCalculation();
+    getMathRecord();
     getAnswer();
   }).catch(function(error) {
     alert(error);
@@ -67,16 +68,28 @@ function appendAnswer(){
   `)
 }//end appendAnswer
 
-function getCalculation(){
-  $.ajax({
-      method: 'GET',
-      url: '/newCalculation'
-    }).then(function(response){
-    }).catch(function(error){
-      alert(error);
-    });
-  //end get newCalculation request
-}//end getCalculation
+function appendCalculations(array) {
+  console.log(array);
+  $('#calculationList').empty();
+  for(let calc of array){
+    $('#calculationList').append(`
+    <li>${calc.numInput1} ${calc.operatorChoice} ${calc.numInput2} = ${calc.solution}</li>
+  `);
+  }
+}//end appendCalculations
+
+
+
+// function getCalculation(){
+//   $.ajax({
+//       method: 'GET',
+//       url: '/newCalculation'
+//     }).then(function(response){
+//     }).catch(function(error){
+//       alert(error);
+//     });
+//   //end get newCalculation request
+// }//end getCalculation
 
 
 function getMathRecord() {
@@ -84,7 +97,7 @@ function getMathRecord() {
     method: 'GET',
     url: '/calculationHistory'
   }).then(function(response){
-    console.log(response);
+    appendCalculations(response);
   }).catch(function(error){
     alert(error);
   });
