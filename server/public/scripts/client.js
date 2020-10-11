@@ -13,6 +13,7 @@ function onReady(){
   
 }//end onReady
 let operatorChoice; 
+let result;
 
 function operatorSetAdd (){ 
   operatorChoice = 'add'
@@ -36,14 +37,11 @@ function submitCalculation(){
     inputTwo: $('#numInput2').val(),
     operator: operatorChoice
   }
-  console.log("client side ", newCalculation);
-  
   $.ajax({
     method: 'POST',
     url: '/newCalculation',
     data: newCalculation
   }).then(function(response) {
-    console.log('response', response);
     getAnswer();
   }).catch(function(error) {
     alert(error);
@@ -55,11 +53,16 @@ function getAnswer() {
     method: 'GET',
     url: '/answer'
   }).then(function(response){
-    console.log('the answer is', response.answer);
+    result = response.answer;
+    appendAnswer();
   }).catch(function(error){
     alert(error);
   });
 }//end get mathRecord request
+
+function appendAnswer(){
+  console.log(result);
+}//end appendAnswer
 
 
 function getMathRecord() {
