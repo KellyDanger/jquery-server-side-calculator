@@ -44,10 +44,22 @@ function submitCalculation(){
     data: newCalculation
   }).then(function(response) {
     console.log('response', response);
+    getAnswer();
   }).catch(function(error) {
     alert(error);
   })
 }//end submitCalculation
+
+function getAnswer() {
+  $.ajax({
+    method: 'GET',
+    url: '/answer'
+  }).then(function(response){
+    console.log('the answer is', response.answer);
+  }).catch(function(error){
+    alert(error);
+  });
+}//end get mathRecord request
 
 
 function getMathRecord() {

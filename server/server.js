@@ -16,8 +16,13 @@ let calculationHistory = [{
   operatorChoice: 'add'
 },
 ];
+let answer;
 
 //GET requests
+app.get('/answer', (req, res) => {
+  res.send({answer: answer});
+})//end GET req
+
 app.get('/calculationHistory', (req, res) => {
   res.send(calculationHistory);
 })//end GET req
@@ -28,7 +33,6 @@ app.post('/newCalculation', (req, res) => {
   let newOperator = calcObj.operator;
   let newInputOne = Number(calcObj.inputOne);
   let newInputTwo = Number(calcObj.inputTwo);
-  let answer;
   if(newOperator === 'add'){
     answer = newInputOne + newInputTwo;
     console.log(answer);
