@@ -24,10 +24,28 @@ app.get('/calculationHistory', (req, res) => {
 
 //POST requests
 app.post('/newCalculation', (req, res) => {
-  console.log(req.body);
+  let calcObj = req.body;
+  let newOperator = calcObj.operator;
+  let newInputOne = Number(calcObj.inputOne);
+  let newInputTwo = Number(calcObj.inputTwo);
+  let answer;
+  if(newOperator === 'add'){
+    answer = newInputOne + newInputTwo;
+    console.log(answer);
+  } else if(newOperator === 'subtract'){
+    answer = newInputOne - newInputTwo;
+    console.log(answer);
+  } else if(newOperator === 'multiply'){
+    answer = newInputOne * newInputTwo;
+    console.log(answer);
+  } else if(newOperator === 'divide'){
+    answer = newInputOne / newInputTwo;
+    console.log(answer);
+  }
   res.sendStatus(200);
 })//end POST req
 
 app.listen(port, () => {
   console.log('Up and Running on Port: ', port);
 })//end app listen
+
