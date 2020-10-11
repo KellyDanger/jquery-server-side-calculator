@@ -12,7 +12,6 @@ app.use(bodyParser.urlencoded({extended: true}));
 //Variables
 let calculationHistory = [];
 let answer;
-// let newCalculation = {};
 
 // GET requests
 app.get('/answer', (req, res) => {
@@ -23,33 +22,33 @@ app.get('/answer', (req, res) => {
 //POST requests
 app.post('/newCalculation', (req, res) => {
   let calcObj = req.body;
-  let newOperator = calcObj.operator;
-  let newInputOne = Number(calcObj.inputOne);
-  let newInputTwo = Number(calcObj.inputTwo);
-  if(newOperator === '+'){
-    answer = newInputOne + newInputTwo;
+  let operator = calcObj.operator;
+  let inputOne = Number(calcObj.inputOne);
+  let inputTwo = Number(calcObj.inputTwo);
+  if(operator === '+'){
+    answer = inputOne + inputTwo;
     console.log(answer);
-  } else if(newOperator === '-'){
-    answer = newInputOne - newInputTwo;
+  } else if(operator === '-'){
+    answer = inputOne - inputTwo;
     console.log(answer);
-  } else if(newOperator === '*'){
-    answer = newInputOne * newInputTwo;
+  } else if(operator === '*'){
+    answer = inputOne * inputTwo;
     console.log(answer);
-  } else if(newOperator === '/'){
-    answer = newInputOne / newInputTwo;
+  } else if(operator === '/'){
+    answer = inputOne / inputTwo;
     console.log(answer);
   };//end if statement
   newCalculation = {
-    numInput1: newInputOne,
-    numInput2: newInputTwo,
-    operatorChoice: newOperator,
+    numInput1: inputOne,
+    numInput2: inputTwo,
+    operatorChoice: operator,
     solution: answer
   };
   calculationHistory.push(newCalculation);
   res.sendStatus(200);
 })//end POST req
 
-
+//send calculation history array to client
 app.get('/calculationHistory', (req, res) => {
   res.send(calculationHistory);
 })//end GET req

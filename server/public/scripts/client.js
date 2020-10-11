@@ -1,9 +1,7 @@
-console.log('hello from js');
 $(document).ready(onReady);
 
 function onReady(){
-  console.log('Hello from jq');
-  getMathRecord();
+  getCalculationHistory();
   //event listeners
   $('#plusButton').on('click', operatorSetAdd);
   $('#subtractButton').on('click', operatorSetSubtract);
@@ -15,6 +13,7 @@ function onReady(){
 }//end onReady
 let operatorChoice; 
 
+//find out what the user wants to DO with the numbers
 function operatorSetAdd (){ 
   operatorChoice = '+';
   $(this).toggleClass("clickedButton");
@@ -35,12 +34,16 @@ function operatorSetDivide (){
   $(this).toggleClass("clickedButton");
 }//end operatorSetDivide
 
+//allow the user to clear the values and reset the operator
 function clearInputs(){
   $('#numInput1').val('');
   $('#numInput2').val('');
   $('button').removeClass();
+  operatorChoice = null;
 }//endClearInputs
 
+
+//send user inputs to the server for calculation
 function submitCalculation(){
   let calcInputs = {
     inputOne: $('#numInput1').val(),
@@ -53,12 +56,23 @@ function submitCalculation(){
     data: calcInputs
   }).then(function(response) {
     //getCalculation();
-    getMathRecord();
+    getCalculationHistory();
     getAnswer();
   }).catch(function(error) {
     alert(error);
   });
 }//end submitCalculation
+
+function getCalculationHistory() {
+  $.ajax({
+    method: 'GET',
+    url: '/calculationHistory'
+  }).then(function(response){
+    appendCalculations(response);
+  }).catch(function(error){
+    alert(error);
+  });
+}//end get getCalculationHistory request
 
 function getAnswer() {
   $.ajax({
@@ -79,7 +93,6 @@ function appendAnswer(data){
 }//end appendAnswer
 
 function appendCalculations(array) {
-  console.log(array);
   $('#calculationList').empty();
   for(let calc of array){
     $('#calculationList').append(`
@@ -102,14 +115,5 @@ function appendCalculations(array) {
 // }//end getCalculation
 
 
-function getMathRecord() {
-  $.ajax({
-    method: 'GET',
-    url: '/calculationHistory'
-  }).then(function(response){
-    appendCalculations(response);
-  }).catch(function(error){
-    alert(error);
-  });
-}//end get mathRecord request
+
 
