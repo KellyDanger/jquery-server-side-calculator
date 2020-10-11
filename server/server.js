@@ -17,11 +17,13 @@ let calculationHistory = [{
 },
 ];
 let answer;
+let newCalculation = {};
 
-//GET requests
+// GET requests
 app.get('/answer', (req, res) => {
   res.send({answer: answer});
 })//end GET req
+
 
 app.get('/calculationHistory', (req, res) => {
   res.send(calculationHistory);
@@ -33,6 +35,11 @@ app.post('/newCalculation', (req, res) => {
   let newOperator = calcObj.operator;
   let newInputOne = Number(calcObj.inputOne);
   let newInputTwo = Number(calcObj.inputTwo);
+  newCalculation = {
+    numInput1: newInputOne,
+    numInput2: newInputTwo,
+    operatorChoice: newOperator
+  };
   if(newOperator === 'add'){
     answer = newInputOne + newInputTwo;
     console.log(answer);
@@ -45,9 +52,13 @@ app.post('/newCalculation', (req, res) => {
   } else if(newOperator === 'divide'){
     answer = newInputOne / newInputTwo;
     console.log(answer);
-  }
+  };//end if statement
   res.sendStatus(200);
 })//end POST req
+
+app.get('/newCalculation', (req, res) => {
+  res.send(newCalculation)
+})//end GET req
 
 app.listen(port, () => {
   console.log('Up and Running on Port: ', port);

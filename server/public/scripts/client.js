@@ -42,6 +42,7 @@ function submitCalculation(){
     url: '/newCalculation',
     data: newCalculation
   }).then(function(response) {
+    getCalculation();
     getAnswer();
   }).catch(function(error) {
     alert(error);
@@ -65,6 +66,17 @@ function appendAnswer(){
     <p>${result}<p>
   `)
 }//end appendAnswer
+
+function getCalculation(){
+  $.ajax({
+      method: 'GET',
+      url: '/newCalculation'
+    }).then(function(response){
+    }).catch(function(error){
+      alert(error);
+    });
+  //end get newCalculation request
+}//end getCalculation
 
 
 function getMathRecord() {
