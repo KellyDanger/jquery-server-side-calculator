@@ -39,7 +39,6 @@ function clearInputs(){
   $('#numInput1').val('');
   $('#numInput2').val('');
   $('button').removeClass();
-  operatorChoice = null;
 }//endClearInputs
 
 
@@ -50,6 +49,8 @@ function submitCalculation(){
     inputTwo: $('#numInput2').val(),
     operator: operatorChoice
   };
+  operatorChoice = null;
+  $('button').removeClass();  
   $.ajax({
     method: 'POST',
     url: '/newCalculation',
