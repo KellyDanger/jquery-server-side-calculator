@@ -3,7 +3,9 @@ const express = require ('express');
 const bodyParser = require ('body-parser');
 
 const app = express();
-const port = 5000;
+// const port = 5000;
+const PORT = process.env.PORT || 5000;
+
 
 app.use(express.static('server/public'));
 app.use(bodyParser.urlencoded({extended: true}));
@@ -57,10 +59,13 @@ app.post('/newCalculation', (req, res) => {
   res.sendStatus(200);
 })//end POST req
 
+app.listen(PORT, () => {
+  console.log(`Our app is running on port ${ PORT }`);
+});
 
-app.listen(port, () => {
-  console.log('Up and Running on Port: ', port);
-})//end app listen
+// app.listen(port, () => {
+//   console.log('Up and Running on Port: ', port);
+// })//end app listen
 
 // //get newCalc
 // app.get('/newCalculation', (req, res) => {
