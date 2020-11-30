@@ -55,7 +55,13 @@ app.post('/newCalculation', (req, res) => {
     operatorChoice: operator,
     solution: answer
   };
-  calculationHistory.push(newCalculation);
+  if(calculationHistory.length < 10) {
+    calculationHistory.push(newCalculation);
+  }else if(calculationHistory.length = 10) {
+    calculationHistory.shift();
+    calculationHistory.push(newCalculation);
+  }
+  
   res.sendStatus(200);
 })//end POST req
 
